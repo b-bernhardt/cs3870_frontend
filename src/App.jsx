@@ -40,6 +40,15 @@ function App() {
           path="/getonecontact"
           element={<Layout title="View Contact"><GetOneContact /></Layout>}
         />
+        {/* NEW ROUTES */}
+        <Route
+          path="/signup"
+          element={<Layout title="Signup"><Signup /></Layout>}
+        />
+        <Route
+          path="/login"
+          element={<Layout title="Login"><Login /></Layout>}
+        />
         {/* default */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

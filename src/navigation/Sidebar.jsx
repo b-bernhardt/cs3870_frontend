@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 export default function Sidebar() {
     return (
-        <aside className="p-3 border rounded-4" style={{  background: "#f8fbff" }}>
+        <aside className="p-3 border rounded-4" style={{ background: "#f8fbff" }}>
             <h4 className="mb-3">Navigation</h4>
             <nav className="nav flex-column gap-2">
                 <NavLink end to="/" className="nav-link border rounded-3 px-3 py-2">
@@ -21,6 +21,14 @@ export default function Sidebar() {
                 </NavLink>
                 <NavLink to="/getonecontact" className="nav-link border rounded-3 px-3 py-2">
                     View Contact
+                </NavLink>
+
+                {/* NEW ROUTES */}
+                <NavLink to="/signup" className="nav-link border rounded-3 px-3 py-2">
+                    Signup
+                </NavLink>
+                <NavLink to="/login" className="nav-link border rounded-3 px-3 py-2">
+                    Login
                 </NavLink>
             </nav>
         </aside>

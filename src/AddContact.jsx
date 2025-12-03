@@ -1,5 +1,6 @@
 // AddContact.jsx
 import React, { useState } from "react";
+import { BASE_URL } from "./config.js";
 export default function AddContact() {
     const [contactName, setContactName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -13,11 +14,19 @@ export default function AddContact() {
             setResponseMsg("Contact name is required.");
             return;
         }
+        // READ TOKEN FROM localStorage
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setResponseMsg("You must login first to add a contact.");
+            return;
+        }
         try {
             const res = await fetch("http://localhost:8081/contacts", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    // Send JWT token here:
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     contact_name: contactName,
@@ -34,6 +43,12 @@ export default function AddContact() {
                 setPhoneNumber("");
                 setMessage("");
                 setImageUrl("");
+            } else if (res.status === 401 || res.status === 403) {
+                // Typical protected route responses
+                setResponseMsg(
+                    data?.detail ||
+                    "Not authorized. Please login again to get a new token."
+                );
             } else {
                 setResponseMsg(data?.message || "Failed to add contact.");
             }
